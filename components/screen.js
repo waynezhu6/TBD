@@ -11,9 +11,9 @@ const Screen = () => {
     for(const row of layout){
       rows = [];
       for(const cell of row.content){
-        rows.push(<View style={[{flex: 1}, styles.cell]}></View>);
+        rows.push(<View style={[{width: cell + "%"}, styles.cell]}></View>);
       }
-      views.push(<View style={{flex: 1}}>{rows}</View>);
+      views.push(<View style={[{height: row.height + "%"}, styles.row]}>{rows}</View>);
     }
     return views;
   }
@@ -30,9 +30,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'skyblue'
   },
+  row: {
+    flexDirection: 'row',
+    width: "100%",
+    backgroundColor: "green"
+  },
   cell: {
     borderColor: 'black',
-    borderWidth: 1
+    borderWidth: 1,
+    height: "100%"
   }
 });
 
