@@ -5,8 +5,8 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const socketio = require('socket.io');
-const fMessage = require('./utils/messages');
-const {userJoin, getCurrUser, userLeave, getFeelsUser} = require('./utils/users');
+const formatMessage = require('./utils/messages');
+const {userJoin, getCurrUser, userLeave} = require('./utils/users');
 const botName = 'VenTalk bot'
 
 const server = http.createServer(app); // express uses this
@@ -19,7 +19,6 @@ io.on('connection', socket =>{
   socket.on('joinRoom', ({username, feeling}) => {
     const user = userJoin(socket.id, username, feeling);
     socket.join(user.feeling);
-
 
     socket.emit('message', 
                 formatMessage(botName,'Welcome, we hope you will feel better!'));
