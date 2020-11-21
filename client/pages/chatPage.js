@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   View,
-  Text
+  Text,
+  ScrollView,
+  TextInput,
+  Keyboard
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Button } from 'galio-framework';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import Message from '../components/message';
 
 const ChatPage = ({navigation}) => {
+
+  const scroll = useRef(null);
+
+  useEffect(() => {
+    const keyboardDidShow = Keyboard.addListener('keyboardDidShow', () => {
+      scroll.current.scrollToEnd({animated: false});
+    });
+    return (() => {
+      keyboardDidShow.remove();
+    })
+  });
+
+  const generateMessages = () => {
+    let elements = [];
+    let key = 0;
+    for(const message of MOCK_MESSAGES){
+      elements.push(
+        <Message
+          owner={message.owner}
+          timestamp={message.timestamp}
+          body={message.body}
+          key={key}
+        />
+      );
+      key += 1;
+    }
+    console.log(elements);
+    return elements;
+  }
 
   return (
   <SafeAreaView style={styles.body}>
@@ -29,7 +62,7 @@ const ChatPage = ({navigation}) => {
 
           <View style={styles.leave}>
             <Button 
-              style={styles.button}
+              style={styles.leaveButton}
               onPress={() => navigation.navigate('home')}
             >
               Leave
@@ -38,6 +71,20 @@ const ChatPage = ({navigation}) => {
       </View>
 
       <View style={styles.content}>
+
+        <Text style={styles.date}>Today, 11/21/2020</Text>
+
+        <ScrollView style={styles.messages} ref={scroll}>
+          {generateMessages()}
+        </ScrollView>
+
+        <View style={styles.textbar}>
+          <TextInput
+            style={styles.input}
+            placeholder="Type your message..."
+          />
+        </View>
+
       </View>
 
   </SafeAreaView>
@@ -52,8 +99,8 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
+    height: 80
   },
   
   back: {
@@ -93,21 +140,74 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   leaveButton: {
-
+    width: '60%',
+    borderRadius: 100
   },
 
   content: {
     flex: 6,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: 'center',
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24
   },
-  button: {
-    width: '60%'
+
+  date: {
+    width: "100%",
+    height: 60,
+    textAlign: "center",
+    textAlignVertical: "center",
+    color: "#B2B2B2"
+  },
+
+  input: {
+    height: 50,
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    margin: 16,
+    marginTop: 0,
+    fontSize: 16,
+    backgroundColor: "#F2F1F6",
+    borderRadius: 24
   }
 
 });
 
 export default ChatPage;
+
+const MOCK_MESSAGES = [
+  {
+    owner: 1,
+    timestamp: "1:40PM",
+    body: 'A world without communication is meaningless. So you have to message everyone you ' +
+    'know! Yes yes yes yes yes. test test test good man good man ice cream'
+  },
+  {
+    owner: 0,
+    timestamp: "1:42PM",
+    body: 'Some people are saying this man is the new Nicholas Batum'
+  },
+  {
+    owner: 1,
+    timestamp: "1:46PM",
+    body: 'I think Mr Elshentnway would give him a massive beating'
+  },
+  {
+    owner: 1,
+    timestamp: "1:40PM",
+    body: 'A world without communication is meaningless. So you have to message everyone you ' +
+    'know! Yes yes yes yes yes. test test test good man good man ice cream'
+  },
+  {
+    owner: 0,
+    timestamp: "1:42PM",
+    body: 'Some people are saying this man is the new Nicholas Batum'
+  },
+  {
+    owner: 1,
+    timestamp: "1:46PM",
+    body: 'I think Mr Elshentnway would give him a massive beating'
+  }
+]
