@@ -59,10 +59,13 @@ const ChatPage = ({navigation}) => {
   }
 
   socket.on("recieveMessage", (data) => {
-    console.log('recieved message');
+    console.log(data.id, socket.id);
+    console.log(data.id != socket.id);
+    if(data.id != socket.id){
       let message = data.message;
       message.owner = 0;
       setHistory(history.concat([message]));
+    }
   });
 
   return (

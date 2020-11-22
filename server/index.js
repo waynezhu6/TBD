@@ -49,7 +49,9 @@ io.on('connection', socket => {
     const user = userManager.getUser(socket.id);
     console.log(user);
     console.log(socket.rooms);
-    socket.emit('recieveMessage', {message: data, id: socket.id});
+    for(const room of Object.values(socket.rooms)){
+      socket.to(room).emit('recieveMessage', {message: data, id: socket.id});
+    }
   });
 
   socket.on('disconnect', () => {
