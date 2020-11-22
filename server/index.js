@@ -1,27 +1,35 @@
 const express = require('express');
 const http = require('http');
-// const fs = require('fs');
 const path = require('path');
-const PORT = process.env.PORT || 5000;
-const app = express();
-const socketio = require('socket.io');
+const socketIO = require('socket.io');
 const formatMessage = require('./utils/messages');
-const {userJoin, getCurrUser, userLeave} = require('./utils/users');
+const {addUser, getUser, removeUser} = require('./utils/users');
+
+const PORT = process.env.PORT || 5000;
 const botName = 'VenTalk bot'
 
+const app = express();
 const server = http.createServer(app); // express uses this
-const io = socketio(server);
 
 // set static folder
 app.use(express.static(path.join(__dirname, '../client')));
 
-io.on('connection', socket =>{
-  socket.on('joinRoom', ({username, feeling}) => {
-    const user = userJoin(socket.id, username, feeling);
-    socket.join(user.feeling);
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}...`);
+});
 
-    socket.emit('message', 
-                formatMessage(botName,'Welcome, we hope you will feel better!'));
+app.use('/',function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+const io = socketIO.listen(server);
+
+io.on('connection', socket => {
+
+  socket.on('requestRoom', ({username, feeling}) => {
+    //user makes a request to join room
+    const user = addUser(socket.id, username, feeling);
+    socket.join(user.feeling);
   
     // Broadcast when a user connects (broadcasts to a specific room)
     socket.broadcast
@@ -45,14 +53,6 @@ io.on('connection', socket =>{
     }
   });
 
-});
-
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}...`);
-});
-
-app.use('/',function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // mental health

@@ -1,18 +1,19 @@
 const users = [];  // can change to database
 
-function userJoin(id, username, feeling){
+function addUser(id, username, feeling){
+    //adds a user to user collection
     const user = { id, username, feeling};
     users.push(user);
     return user;
 }
 
-// get the current user
-function getCurrUser(id){
+function getUser(id){
+    // gets the user with this id
     return users.find(user => user.id == id);
 }
 
-// user leaving chat
-function userLeave(id){
+function removeUser(id){
+    //remove user from user collection
     const index = users.findIndex(user => user.id == id);
 
     if(index != -1){
@@ -20,8 +21,8 @@ function userLeave(id){
     }
 }
 
-// Get Person in the feelings chat
 function getFeelsUser(feelings){
+    // Get Person in the feelings chat
     return users.filter(user => user.room == room);
 }
 
