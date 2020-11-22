@@ -1,4 +1,5 @@
 import React from 'react';
+import io from 'socket.io-client';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -39,3 +40,4 @@ const App = () => {
 };
 
 export default App;
+export const socket = io('http://192.168.0.20:5000', {transports: ['websocket'], jsonp: false });   

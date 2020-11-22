@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Button } from 'galio-framework';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { socket } from "../App";
 
 import Message from '../components/message';
 
@@ -40,52 +41,54 @@ const ChatPage = ({navigation}) => {
       );
       key += 1;
     }
-    console.log(elements);
     return elements;
   }
+
+  console.log(socket);
 
   return (
   <SafeAreaView style={styles.body}>
 
-      <View style={styles.header}>
+    <View style={styles.header}>
 
-          {/* <View style={styles.back}></View> */}
+      {/* <View style={styles.back}></View> */}
 
-          <View style={styles.profile}>
-            <Ionicons name="ios-person-circle-outline" size={48} style={styles.profileIcon}/>
-          </View>
-
-          <View style={styles.info}>
-            <Text style={styles.username}>Madeleine</Text>
-            <Text style={styles.status}>Online</Text>
-          </View>
-
-          <View style={styles.leave}>
-            <Button 
-              style={styles.leaveButton}
-              onPress={() => navigation.navigate('home')}
-            >
-              Leave
-            </Button>
-          </View>
+      <View style={styles.profile}>
+        <Ionicons name="ios-person-circle-outline" size={48} style={styles.profileIcon}/>
       </View>
 
-      <View style={styles.content}>
-
-        <Text style={styles.date}>Today, 11/21/2020</Text>
-
-        <ScrollView style={styles.messages} ref={scroll}>
-          {generateMessages()}
-        </ScrollView>
-
-        <View style={styles.textbar}>
-          <TextInput
-            style={styles.input}
-            placeholder="Type your message..."
-          />
-        </View>
-
+      <View style={styles.info}>
+        <Text style={styles.username}>Madeleine</Text>
+        <Text style={styles.status}>Online</Text>
       </View>
+
+      <View style={styles.leave}>
+        <Button 
+          style={styles.leaveButton}
+          onPress={() => navigation.navigate('home')}
+        >
+          Leave
+        </Button>
+      </View>
+        
+    </View>
+
+    <View style={styles.content}>
+
+      <Text style={styles.date}>Today, 11/21/2020</Text>
+
+      <ScrollView style={styles.messages} ref={scroll}>
+        {generateMessages()}
+      </ScrollView>
+
+      <View style={styles.textbar}>
+        <TextInput
+          style={styles.input}
+          placeholder="Type your message..."
+        />
+      </View>
+
+    </View>
 
   </SafeAreaView>
   );
