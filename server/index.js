@@ -33,22 +33,22 @@ io.on('connection', socket => {
   
     // Broadcast when a user connects (broadcasts to a specific room)
     socket.broadcast
-      .to(user.feeling)
-      .emit('message', formatMessage(botName,`${user.usrname} has joined the chat`));
+      .to(user.input)
+      .emit('message', formatMessage(botName,`${user.username} has joined the chat`));
   })
 
   // List for chat message
   socket.on('chatMessage', (msg) =>{
     const user = getCurrUser(socket.id);
 
-    io.to(user.feeling).emit('message', formatMessage(user.username, msg));
+    io.to(user.input).emit('message', formatMessage(user.username, msg));
   });
 
   // Client disconnected
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
     if(user){
-      io.to(user.feeling)
+      io.to(user.input)
         .emit('message', formatMessage(botName,`${user.username} has left the chat`));
     }
   });

@@ -1,4 +1,4 @@
-const users = [];  // can change to database
+const {Person, matchUserFeelings, matchUserCasual, matchUsers} = require('./utils/people');
 
 function addUser(id, username, feeling){
     //adds a user to user collection
@@ -15,20 +15,32 @@ function getUser(id){
 function removeUser(id){
     //remove user from user collection
     const index = users.findIndex(user => user.id == id);
-
-    if(index != -1){
-        return users.splice(index, 1)[0];
-    }
 }
 
-function getFeelsUser(feelings){
-    // Get Person in the feelings chat
-    return users.filter(user => user.room == room);
+function userWaiting(id, username, input){
+  const user = new Person(id, username, input);
+  users.push(user);
+  return user;
+}
+
+function lookforMatch(){
+  matchUsers(totalUsers);
+}
+
+// Get Person in the feelings chat
+function getFeelsUser(input){
+  return users.filter(user => user.input == input);
 }
 
 module.exports = {
-    userJoin, 
-    getCurrUser,
-    userLeave,
-    getFeelsUser
+  userJoin, 
+  getCurrUser,
+  userLeave,
+  userWaiting,
+  getFeelsUser,
+  lookforMatch
 };
+
+// alone in a rooom
+// in a room with someone 
+// not in a room
