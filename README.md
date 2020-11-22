@@ -8,7 +8,7 @@
   <h3 align="center">VenTalk</h3>
 
   <p align="center">
-    Need to vent about a bad day or just want someone to chat with? VenTalk pairs users with compatible needs in this unique wellness messaging app and quickly relieves everyday     stressors.
+    Need to vent about a bad day or just want someone to chat with? VenTalk pairs users with compatible needs in this unique wellness messaging app and quickly relieves everyday     stressors. Created for Hack Western VII.
     <br />
   </p>
 </p>
@@ -36,6 +36,8 @@
 * [Node.js](https://nodejs.org/en/)
 * [Google Compute Engine](https://cloud.google.com/)
 * [Socket.io](https://socket.io/)
+
+Our client app was built using React Native. On the backend, we have our server running on a GCP Compute Engine instance, which manages users, provides matchmaking services, and acts as a relay for sending messages between clients. Matchmaking is done using Dandelion's [Text Similarity API](https://dandelion.eu/), where we have an algorthim that matches users based on related content and sentiment scores. Client-to-client communication is done with Socket.io, which provides a real-time websocket connection to each active user.
 
 <!-- USAGE EXAMPLES -->
 ## Usage
