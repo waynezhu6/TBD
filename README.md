@@ -14,8 +14,6 @@
 </p>
 
 
-
-<!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
 * [About the Project](#about-the-project)
@@ -24,11 +22,12 @@
 * [Acknowledgements](#acknowledgements)
 
 
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![About Product Screenshot][product-screenshot]](https://example.com)
+Welcome to VenTalk! The idea for VenTalk originated from an everyday stressor that everyone on our team could relate to; commuting alone to and from class during the school year. After a stressful work or school day, we want to let out all our feelings and thoughts, but do not want to alarm or disturb our loved ones. Releasing built-up emotional tension is a highly effective form of self-care, but many people stay quiet as not to become a burden on those around them. Over time, this takes a toll on one’s well being, so we decided to tackle this issue in a creative yet simple way. 
 
+This project is our group's submission for [Hack Western VII](https://hack-western-7.devpost.com/). See our [Devpost page](https://devpost.com/software/presssy) to learn more.
 
 ### Built With
 
@@ -43,7 +42,7 @@ Our client app was built using React Native. On the backend, we have our server 
 ## Usage
 
 Upon entering the home screen, the user can carry out three choices: 
-* Mental Health - a chat thread dedicated to all things mental health. Tell the app how you're feeling right now and it will automatically match you with someone who shares similar sentiments.
+* Mental Health - a chat thread dedicated to all things mental health. Tell the app how you're feeling right now and it will automatically match you with someone who shares similar sentiments, if another user is available.
 * Just Chat - a general chat thread. Again, tell the app what you want to talk about and it will do its best to match you with a conversation partner with similar interests.
 * Connect Me with Hotlines - a collection of important contacts in case you ever need them.
 
@@ -55,20 +54,3 @@ Upon entering the home screen, the user can carry out three choices:
 * [Josh Ming](https://www.linkedin.com/in/joshua-ming-bb5a6b185/)
 * [Madeleine Chu](https://www.linkedin.com/in/madeleine-chu/)
 * [Wayne Zhu](https://waynezhu.ca)
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=flat-square
-[contributors-url]: https://github.com/github_username/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=flat-square
-[forks-url]: https://github.com/github_username/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=flat-square
-[stars-url]: https://github.com/github_username/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo.svg?style=flat-square
-[issues-url]: https://github.com/github_username/repo/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo.svg?style=flat-square
-[license-url]: https://github.com/github_username/repo/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/github_username
-[product-screenshot]: images/screenshot.png
