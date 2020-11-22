@@ -5,14 +5,16 @@ const { v4: uuidv4 } = require('uuid');
 class UserManager{
 
   constructor(){
-    let testUser = new User(12345, "apples and orange");
-    this.users = {12345: testUser}; //mapping socketID to user
-    this.waiting = {12345: testUser}; //mapping socketID to user who is waiting
+    this.users = {}; //mapping socketID to user
+    this.waiting = {}; //mapping socketID to user who is waiting
 
     this.threshold = 0.5 //minimum matching score standard
 
     //testing stuff
-    testUser.setRoom(this.getUUID());
+    // let testUser = new User(12345, "apples and orange");
+    // this.users = {12345: testUser}; //mapping socketID to user
+    // this.waiting = {12345: testUser}; //mapping socketID to user who is waiting
+    // testUser.setRoom(this.getUUID());
   }
 
   addUser(socketID){

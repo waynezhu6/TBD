@@ -47,4 +47,4 @@ const App = () => {
 };
 
 export default App;
-export const socket = io('http://97.108.8.182:5000', {transports: ['websocket'], jsonp: false });   
+export const socket = io('http://34.95.61.158:5000', {transports: ['websocket'], jsonp: false });   
