@@ -8,6 +8,7 @@ import SplashPage from './pages/splashPage';
 import HomePage from './pages/homePage';
 import ChatPage from './pages/chatPage';
 import InputPage from './pages/inputPage';
+import HotlinePage from './pages/hotlinePage';
 
 const App = () => {
 
@@ -41,11 +42,17 @@ const App = () => {
           options={{headerShown: false}}
         />
 
+        <Stack.Screen
+          name="hotline"
+          component={HotlinePage}
+          options={{headerShown: false}}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default App;
-//export const socket = io('http://34.95.61.158:5000', {transports: ['websocket'], jsonp: false });   
-export const socket = io('http://192.168.0.20:5000', {transports: ['websocket'], jsonp: false });   
+export const socket = io('http://34.95.61.158:5000');   
+//export const socket = io('http://192.168.0.20:5000', {transports: ['websocket'], jsonp: false });   

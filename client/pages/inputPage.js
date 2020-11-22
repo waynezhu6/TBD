@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 
 import { Button } from 'galio-framework';
+import Spinner from 'react-native-loading-spinner-overlay';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 import { socket } from '../App';
 
 const InputPage = ({navigation}) => {
@@ -23,19 +26,40 @@ const InputPage = ({navigation}) => {
 
   const onClick = () => {
     console.log(input);
-    if(input.length > 0)
+    if(input.length > 0){
       socket.emit('requestRoom', {text: input});
+      setPage(0);
+    }
   }
 
   socket.on('roomCreated', (data) => {
     setPage(1);
   });
 
+  if(page == 0){
+    return (
+      <SafeAreaView style={styles.container}>
+        <Spinner
+          visible={true}
+          textContent={'Loading...'}
+          textStyle={styles.spinner}
+        />
+      </SafeAreaView>
+    )
+  }
+
   return (
     <SafeAreaView style={styles.body}>
 
       <View style={styles.header}>
+        <Entypo 
+          name="chevron-thin-left" 
+          size={32} 
+          style={styles.backIcon}
+          onPress={() => navigation.navigate('home')}
+        />
         <Text style={styles.title}>VenTalk</Text>
+        <View style={styles.spacer}></View>
       </View>
       
       <View style={styles.content}>
@@ -76,13 +100,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 80
   },
+  backIcon: {
+    flex: 1,
+    color: "white",
+    paddingLeft: 10,
+    textAlignVertical: "center"
+  },
   title: {
-    width: '100%',
-    height: '100%',
+    flex: 3,
     textAlign: 'center',
     textAlignVertical: 'center',
     fontSize: 20,
     color: "#FFFFFF"
+  },
+  spacer: {
+    flex: 1
   },
 
   content: {
@@ -117,7 +149,27 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: "85%",
     height: 52,
-    alignSelf: "center",
+    alignSelf: "center"
+  },
+
+  spinner: {
+    color: '#FFF'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5
   }
 
 });

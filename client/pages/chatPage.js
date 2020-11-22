@@ -51,6 +51,11 @@ const ChatPage = ({navigation}) => {
     return elements;
   }
 
+  const onLeave = () => {
+    socket.emit('leaveRoom');
+    navigation.navigate('home');
+  }
+
   const sendMessage = () => {
     let message = {owner: 1, timestamp: "3:02AM", body: input}
     setHistory(history.concat([message]));
@@ -87,7 +92,7 @@ const ChatPage = ({navigation}) => {
       <View style={styles.leave}>
         <Button 
           style={styles.leaveButton}
-          onPress={() => navigation.navigate('home')}
+          onPress={() => onLeave()}
         >
           Leave
         </Button>

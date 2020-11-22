@@ -21,20 +21,21 @@ const HomePage = ({navigation}) => {
         style={[styles.option, styles.option1]}
         onPress={() => navigation.navigate('input')}
       >
-        <Text>Mental Health</Text>
+        <Text style={styles.h1}>Mental Health</Text>
       </Button>
 
       <Button 
         style={[styles.option, styles.option2]}
         onPress={() => navigation.navigate('input')}
       >
-        <Text>Just Chat</Text>
+        <Text style={styles.h1}>Just Chat</Text>
       </Button>
 
       <Button 
         style={[styles.option, styles.option3]}
+        onPress={() => navigation.navigate('hotline')}
       >
-        <Text>Connect Me with Hotlines</Text>
+        <Text style={styles.h1}>Connect Me with Hotlines</Text>
       </Button>
       
       <View style={styles.footer}></View>
@@ -77,6 +78,11 @@ const styles = StyleSheet.create({
   },
   option3: {
     backgroundColor: '#684CF1'
+  },
+  h1: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold"
   },
 
   footer: {

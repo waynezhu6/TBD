@@ -54,6 +54,10 @@ io.on('connection', socket => {
     }
   });
 
+  socket.on('leaveRoom', (data) => {
+
+  });
+
   socket.on('disconnect', () => {
     //event on disconnect
     console.log("quit: " + socket.id);
