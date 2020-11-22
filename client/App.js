@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SplashPage from './pages/splashPage';
 import HomePage from './pages/homePage';
 import ChatPage from './pages/chatPage';
+import InputPage from './pages/inputPage';
 
 const App = () => {
 
@@ -29,6 +30,12 @@ const App = () => {
         />
 
         <Stack.Screen
+          name="input"
+          component={InputPage}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
           name="chat"
           component={ChatPage}
           options={{headerShown: false}}
@@ -40,4 +47,4 @@ const App = () => {
 };
 
 export default App;
-export const socket = io('http://192.168.0.20:5000', {transports: ['websocket'], jsonp: false });   
+export const socket = io('http://97.108.8.182:5000', {transports: ['websocket'], jsonp: false });   

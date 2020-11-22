@@ -1,9 +1,27 @@
 class User{
 
-  constructor(socketID, username, text){
+  constructor(socketID, text=""){
       this.id = socketID; //this client's socket id
-      this.username = username; //this client's username
       this.text = text; //this user's current feelings
+      this.room = null;
+  }
+
+  setText(text){
+    this.text = text;
+  }
+
+  getRoom(){
+    return this.room;
+  }
+
+  setRoom(id){
+    //set this person's room id
+    this.room = id;
+  }
+
+  clearRoom(id){
+    //removes this person's room id
+    this.room = null;
   }
   
 }

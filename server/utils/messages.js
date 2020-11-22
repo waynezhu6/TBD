@@ -1,10 +1,9 @@
 const moment = require('moment');
 const axios = require('axios');
 
-function formatMessage(username, textmsg){
+function formatMessage(message){
   return {
-      username,
-      test, 
+      message,
       time: moment().format('h:mm a')
   };
 }
@@ -24,17 +23,10 @@ async function getSimilarity(text1, text2) {
     "&lang=en" +
     "&token=c8a3cb3ba95d4a2094179673eb720550";
 
-  axios.get(url).then(
-    (response) => {
-      //console.log(response.data.similarity);
-      return response.data.similarity;
-    },
-    (error) => {
-      //console.log(error);
-      return error;
-    }
-  );
+  console.log(url);
 
+  let res = await axios.get(url);
+  return res.data.similarity;
 }
 
 module.exports = { formatMessage, getSimilarity };

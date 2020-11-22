@@ -2,11 +2,10 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
-const formatMessage = require('./utils/messages');
-const {addUser, getUser, removeUser} = require('./utils/userManager');
+const { formatMessage } = require('./utils/messages');
+const UserManager = require('./utils/userManager');
 
 const PORT = process.env.PORT || 5000;
-const botName = 'VenTalk bot'
 
 const app = express();
 const server = http.createServer(app); // express uses this
@@ -23,39 +22,47 @@ app.use('/',function(req, res) {
 });
 
 const io = socketIO.listen(server);
+const userManager = new UserManager();
 
 io.on('connection', socket => {
 
-  socket.on('requestRoom', ({username, feeling}) => {
+  //create a user upon connecting
+  userManager.addUser(socket.id);
+  console.log(socket.id);
+
+  socket.on('requestRoom', async (data) => {
     //user makes a request to join room
-    const user = addUser(socket.id, username, feeling);
-    socket.join(user.feeling);
-  
-    // Broadcast when a user connects (broadcasts to a specific room)
-    socket.broadcast
-      .to(user.input)
-      .emit('message', formatMessage(botName,`${user.username} has joined the chat`));
-  });
-
-  // List for chat message
-  socket.on('chatMessage', (msg) =>{
-    const user = getCurrUser(socket.id);
-
-    io.to(user.input).emit('message', formatMessage(user.username, msg));
-  });
-
-  // Client disconnected
-  socket.on('disconnect', () => {
-    const user = userLeave(socket.id);
-    if(user){
-      io.to(user.input)
-        .emit('message', formatMessage(botName,`${user.username} has left the chat`));
+    let user = userManager.getUser(socket.id);
+    user.setText(data.text);
+    let res = await userManager.findMatch(socket.id); 
+    socket.join(res[1]);
+    if(res[0]){
+      console.log(40);
+      socket.to(res[1]).emit('roomCreated');
+      socket.emit('roomCreated');
     }
+  });
+
+  socket.on('sendMessage', (data) => {
+    //send a message to the other person in this room
+    console.log('sendMessage');
+    const user = userManager.getUser(socket.id);
+    console.log(user);
+    console.log(socket.rooms);
+    socket.emit('recieveMessage', {message: data, id: socket.id});
+  });
+
+  socket.on('disconnect', () => {
+    //event on disconnect
+    console.log("quit: " + socket.id);
+    let user = userManager.removeUser(socket.id);
+    if(user)
+      io.to(socket.id).emit('message', formatMessage(`${user.username} has left the chat`));
   });
 
 });
 
-// mental health
-// just chat
-// connect me to emergency services
-// event for user is typing and user is not typing
+// // Broadcast when a user connects (broadcasts to a specific room)
+// socket.broadcast
+//   .to(user.input)
+//   .emit('message', formatMessage(`${user.username} has joined the chat`));

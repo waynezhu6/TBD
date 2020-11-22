@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -17,11 +17,18 @@ import Message from '../components/message';
 const ChatPage = ({navigation}) => {
 
   const scroll = useRef(null);
+  const [input, setInput] = useState(""); //current input string
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     const keyboardDidShow = Keyboard.addListener('keyboardDidShow', () => {
       scroll.current.scrollToEnd({animated: false});
     });
+
+    if(scroll.current){
+      scroll.current.scrollToEnd({animated: true});
+    }
+
     return (() => {
       keyboardDidShow.remove();
     })
@@ -30,7 +37,7 @@ const ChatPage = ({navigation}) => {
   const generateMessages = () => {
     let elements = [];
     let key = 0;
-    for(const message of MOCK_MESSAGES){
+    for(const message of history){
       elements.push(
         <Message
           owner={message.owner}
@@ -44,7 +51,19 @@ const ChatPage = ({navigation}) => {
     return elements;
   }
 
-  console.log(socket);
+  const sendMessage = () => {
+    let message = {owner: 1, timestamp: "3:02AM", body: input}
+    setHistory(history.concat([message]));
+    setInput("");
+    socket.emit("sendMessage", message);
+  }
+
+  socket.on("recieveMessage", (data) => {
+    console.log('recieved message');
+      let message = data.message;
+      message.owner = 0;
+      setHistory(history.concat([message]));
+  });
 
   return (
   <SafeAreaView style={styles.body}>
@@ -58,7 +77,7 @@ const ChatPage = ({navigation}) => {
       </View>
 
       <View style={styles.info}>
-        <Text style={styles.username}>Madeleine</Text>
+        <Text style={styles.username}>Anonymous</Text>
         <Text style={styles.status}>Online</Text>
       </View>
 
@@ -85,6 +104,9 @@ const ChatPage = ({navigation}) => {
         <TextInput
           style={styles.input}
           placeholder="Type your message..."
+          onChangeText={text => setInput(text)}
+          onSubmitEditing={() => {sendMessage()}}
+          value={input}
         />
       </View>
 
@@ -98,7 +120,7 @@ const styles = StyleSheet.create({
   body: {
     flexDirection: "column",
     flex: 1,
-    backgroundColor: "#7D799A"
+    backgroundColor: "#9886C3"
   },
 
   header: {
@@ -166,9 +188,8 @@ const styles = StyleSheet.create({
 
   input: {
     height: 50,
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     margin: 16,
     marginTop: 0,
     fontSize: 16,
