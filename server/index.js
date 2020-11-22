@@ -3,7 +3,7 @@ const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
 const formatMessage = require('./utils/messages');
-const {addUser, getUser, removeUser} = require('./utils/users');
+const {addUser, getUser, removeUser} = require('./utils/userManager');
 
 const PORT = process.env.PORT || 5000;
 const botName = 'VenTalk bot'
@@ -35,7 +35,7 @@ io.on('connection', socket => {
     socket.broadcast
       .to(user.input)
       .emit('message', formatMessage(botName,`${user.username} has joined the chat`));
-  })
+  });
 
   // List for chat message
   socket.on('chatMessage', (msg) =>{
