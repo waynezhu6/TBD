@@ -8,7 +8,7 @@
   <h3 align="center">VenTalk</h3>
 
   <p align="center">
-    *description here
+    Need to vent about a bad day or just want someone to chat with? VenTalk pairs users with compatible needs in this unique wellness messaging app and quickly relieves everyday     stressors.
     <br />
   </p>
 </p>
@@ -20,12 +20,8 @@
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
 * [Usage](#usage)
 * [Acknowledgements](#acknowledgements)
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -41,48 +37,21 @@
 * [Google Compute Engine](https://cloud.google.com/)
 * [Socket.io](https://socket.io/)
 
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-Luckily there aren't that many prerequisites for getting the app up and running:
-* Node.js and npm
-* An Android or iOS device
-
-### Installation
-
-1. Clone the repo
-```sh
-git clone https://github.com/waynezhu6/VenTalk.git
-```
-2. Install server-related NPM packages
-```sh
-cd VenTalk/server
-npm install
-```
-3. Start the server
-```sh
-npm start
-```
-3. Install Ventalk.apk on your Android device to access the client, or access the React Native source code in the ./client folder and compile for yourself on Android Studio or XCode
-
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-*some stuff here
+Upon entering the home screen, the user can carry out three choices: 
+* Mental Health - a chat thread dedicated to all things mental health. Tell the app how you're feeling right now and it will automatically match you with someone who shares similar sentiments.
+* Just Chat - a general chat thread. Again, tell the app what you want to talk about and it will do its best to match you with a conversation partner with similar interests.
+* Connect Me with Hotlines - a collection of important contacts in case you ever need them.
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 * [Clayon Haight](https://clayhaight.ca)
-* [Josh Ming]()
-* [Madeleine Chu]()
+* [Josh Ming](https://www.linkedin.com/in/joshua-ming-bb5a6b185/)
+* [Madeleine Chu](https://www.linkedin.com/in/madeleine-chu/)
 * [Wayne Zhu](https://waynezhu.ca)
 
 
