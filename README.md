@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="VenTalkLogo.png" alt="Logo" width="80" height="80">
+    <img src="VenTalkLogo.png" alt="Logo" width="140" height="120">
   </a>
 
   <h3 align="center">VenTalk</h3>
@@ -24,7 +24,6 @@
 
 ## About The Project
 
-[![About Product Screenshot][product-screenshot]](https://example.com)
 Welcome to VenTalk! The idea for VenTalk originated from an everyday stressor that everyone on our team could relate to; commuting alone to and from class during the school year. After a stressful work or school day, we want to let out all our feelings and thoughts, but do not want to alarm or disturb our loved ones. Releasing built-up emotional tension is a highly effective form of self-care, but many people stay quiet as not to become a burden on those around them. Over time, this takes a toll on one’s well being, so we decided to tackle this issue in a creative yet simple way. 
 
 This project is our group's submission for [Hack Western VII](https://hack-western-7.devpost.com/). See our [Devpost page](https://devpost.com/software/presssy) to learn more.
